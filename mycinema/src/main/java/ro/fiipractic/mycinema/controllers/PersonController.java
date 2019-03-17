@@ -1,12 +1,17 @@
 package ro.fiipractic.mycinema.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ro.fiipractic.mycinema.entities.Person;
+import ro.fiipractic.mycinema.services.PersonService;
 
 @RestController
 @RequestMapping("/api/persons")
 public class PersonController {
 
+    @Autowired
+    PersonService personService;
 
     @GetMapping(value = "/hello1")
     public String helloWorld() {
@@ -28,5 +33,13 @@ public class PersonController {
         return "My name is " + myName;
     }
 
-    //asaasasa
+    @GetMapping(value = "/helloService")
+    public String helloWorldFromService() {
+        return personService.helloFromService();
+    }
+
+    @PostMapping(value = "/saveMyPerson")
+    public Person saveMyPerson(@RequestBody Person personForSave) {
+        return personService.savePerson(personForSave);
+    }
 }
