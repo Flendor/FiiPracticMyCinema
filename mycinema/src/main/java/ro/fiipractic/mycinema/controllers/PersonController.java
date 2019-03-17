@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ro.fiipractic.mycinema.entities.Person;
 import ro.fiipractic.mycinema.services.PersonService;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/persons")
 public class PersonController {
@@ -41,5 +44,24 @@ public class PersonController {
     @PostMapping(value = "/saveMyPerson")
     public Person saveMyPerson(@RequestBody Person personForSave) {
         return personService.savePerson(personForSave);
+    }
+
+    @GetMapping(value = "/getById/{id}")
+    public Optional<Person> getById(@PathVariable(value = "id") Long id)
+    {
+        return personService.getById(id);
+    }
+
+    @GetMapping(value = "/getAll")
+    public List<Person> getAll()
+    {
+        return personService.getAll();
+    }
+
+    @PostMapping(value = "/modifyPhone")
+    public Person modifyPhone(@RequestParam(value = "id") Long id, @RequestParam(value = "newNumber") String newNumber)
+    {
+        Person p = personService.modifyPhone(id, newNumber);
+        return personService.savePerson(p);
     }
 }
