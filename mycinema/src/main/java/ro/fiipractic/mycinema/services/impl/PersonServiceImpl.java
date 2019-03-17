@@ -26,8 +26,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<Person> getById(Long id) {
-        return personRepository.findById(id);
+    public Person getById(Long id) {
+        return personRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person modifyPhone(Long id, String newNumber) {
-        Person p = personRepository.getOne(id);
+        Person p = personRepository.findById(id).orElse(null);
         p.setPhone(newNumber);
         return p;
     }

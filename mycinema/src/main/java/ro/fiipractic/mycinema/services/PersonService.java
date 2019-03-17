@@ -10,7 +10,7 @@ public interface PersonService {
 
     Person savePerson(Person personForSave);
 
-    Optional<Person> getById(Long id);
+    Person getById(Long id);
 
     List<Person> getAll();
 
