@@ -14,10 +14,6 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     PersonRepository personRepository;
 
-    @Override
-    public String helloFromService() {
-        return "Hello from service!";
-    }
 
     @Override
     public Person savePerson(Person personForSave) {
@@ -25,11 +21,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person getById(Long id) {
-        Person p = personRepository.findById(id).orElse(null);
-        if(p == null)
-            throw new RuntimeException("Non-existent ID!");
-        return p;
+    public Person getById(Long id){
+        return personRepository.findById(id).orElseThrow(() -> new RuntimeException("Non-existent ID!"));
     }
 
     @Override
@@ -39,37 +32,27 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person modifyName(Long id, String newName) {
-        Person p = personRepository.findById(id).orElse(null);
-        if (p == null)
-            throw new RuntimeException("Non-existent ID!");
+        Person p = personRepository.findById(id).orElseThrow(() -> new RuntimeException("Non-existent ID!"));
         p.setFullName(newName);
-        return p;
+        return personRepository.save(p);
     }
 
     @Override
     public Person modifyPhone(Long id, String newNumber) {
-        Person p = personRepository.findById(id).orElse(null);
-        if(p == null)
-            throw new RuntimeException("Non-existent ID!");
+        Person p = personRepository.findById(id).orElseThrow(() -> new RuntimeException("Non-existent ID!"));
         p.setPhone(newNumber);
-        return p;
+        return personRepository.save(p);
     }
 
     @Override
     public Person modifyEmail(Long id, String newEmail) {
-        Person p = personRepository.findById(id).orElse(null);
-        if (p == null)
-            throw new RuntimeException("Non-existent ID!");
+        Person p = personRepository.findById(id).orElseThrow(() -> new RuntimeException("Non-existent ID!"));
         p.setEmail(newEmail);
-        return p;
+        return personRepository.save(p);
     }
 
     @Override
-    public Person deleteById(Long id) {
-        Person p = personRepository.findById(id).orElse(null);
-        if (p == null)
-            throw new RuntimeException("Non-existent ID!");
+    public void deleteById(Long id) {
         personRepository.deleteById(id);
-        return p;
     }
 }
