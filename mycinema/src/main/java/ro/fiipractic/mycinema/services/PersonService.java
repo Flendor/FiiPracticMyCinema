@@ -5,7 +5,6 @@ import ro.fiipractic.mycinema.entities.Person;
 import java.util.List;
 
 public interface PersonService {
-    String helloFromService();
 
     Person savePerson(Person personForSave);
 
@@ -19,5 +18,5 @@ public interface PersonService {
 
     Person modifyEmail(Long id, String newEmail);
 
-    Person deleteById(Long id);
+    void deleteById(Long id);
 }
