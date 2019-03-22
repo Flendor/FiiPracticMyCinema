@@ -26,7 +26,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getById(Long id) {
-        return personRepository.findById(id).orElse(null);
+        Person p = personRepository.findById(id).orElse(null);
+        if(p == null)
+            throw new RuntimeException("Non-existent ID!");
+        return p;
     }
 
     @Override
