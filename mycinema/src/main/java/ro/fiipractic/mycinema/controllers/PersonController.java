@@ -64,4 +64,10 @@ public class PersonController {
         Person p = personService.modifyPhone(id, newNumber);
         return personService.savePerson(p);
     }
+
+    @DeleteMapping(value = "/deleteById/{id}")
+    public Person deleteById(@PathVariable(value = "id") Long id)
+    {
+        return personService.deleteById(id);
+    }
 }

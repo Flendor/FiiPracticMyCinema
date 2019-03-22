@@ -38,7 +38,16 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person modifyPhone(Long id, String newNumber) {
         Person p = personRepository.findById(id).orElse(null);
-        p.setPhone(newNumber);
+        if(p != null)
+            p.setPhone(newNumber);
+        return p;
+    }
+
+    @Override
+    public Person deleteById(Long id) {
+        Person p = personRepository.findById(id).orElse(null);
+        if(p!=null)
+            personRepository.deleteById(id);
         return p;
     }
 }

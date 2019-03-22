@@ -15,4 +15,6 @@ public interface PersonService {
     List<Person> getAll();
 
     Person modifyPhone(Long id, String newNumber);
+
+    Person deleteById(Long id);
 }
