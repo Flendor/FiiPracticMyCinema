@@ -7,7 +7,6 @@ import ro.fiipractic.mycinema.repositories.PersonRepository;
 import ro.fiipractic.mycinema.services.PersonService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -36,18 +35,38 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person modifyName(Long id, String newName) {
+        Person p = personRepository.findById(id).orElse(null);
+        if (p == null)
+            throw new RuntimeException("Non-existent ID!");
+        p.setFullName(newName);
+        return p;
+    }
+
+    @Override
     public Person modifyPhone(Long id, String newNumber) {
         Person p = personRepository.findById(id).orElse(null);
-        if(p != null)
-            p.setPhone(newNumber);
+        if(p == null)
+            throw new RuntimeException("Non-existent ID!");
+        p.setPhone(newNumber);
+        return p;
+    }
+
+    @Override
+    public Person modifyEmail(Long id, String newEmail) {
+        Person p = personRepository.findById(id).orElse(null);
+        if (p == null)
+            throw new RuntimeException("Non-existent ID!");
+        p.setEmail(newEmail);
         return p;
     }
 
     @Override
     public Person deleteById(Long id) {
         Person p = personRepository.findById(id).orElse(null);
-        if(p!=null)
-            personRepository.deleteById(id);
+        if (p == null)
+            throw new RuntimeException("Non-existent ID!");
+        personRepository.deleteById(id);
         return p;
     }
 }

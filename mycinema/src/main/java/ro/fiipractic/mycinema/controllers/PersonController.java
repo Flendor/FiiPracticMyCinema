@@ -7,7 +7,6 @@ import ro.fiipractic.mycinema.entities.Person;
 import ro.fiipractic.mycinema.services.PersonService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/persons")
@@ -47,27 +46,35 @@ public class PersonController {
     }
 
     @GetMapping(value = "/getById/{id}")
-    public Person getById(@PathVariable(value = "id") Long id)
-    {
+    public Person getById(@PathVariable(value = "id") Long id) {
         return personService.getById(id);
     }
 
     @GetMapping(value = "/getAll")
-    public List<Person> getAll()
-    {
+    public List<Person> getAll() {
         return personService.getAll();
     }
 
+    @PostMapping(value = "/modifyName")
+    public Person modifyName(@RequestParam(value = "id") Long id, @RequestParam(value = "newName") String newName) {
+        Person p = personService.modifyName(id, newName);
+        return personService.savePerson(p);
+    }
+
     @PostMapping(value = "/modifyPhone")
-    public Person modifyPhone(@RequestParam(value = "id") Long id, @RequestParam(value = "newNumber") String newNumber)
-    {
+    public Person modifyPhone(@RequestParam(value = "id") Long id, @RequestParam(value = "newNumber") String newNumber) {
         Person p = personService.modifyPhone(id, newNumber);
         return personService.savePerson(p);
     }
 
+    @PostMapping(value = "/modifyEmail")
+    public Person modifyEmail(@RequestParam(value = "id") Long id, @RequestParam(value = "newEmail") String newEmail) {
+        Person p = personService.modifyEmail(id, newEmail);
+        return personService.savePerson(p);
+    }
+
     @DeleteMapping(value = "/deleteById/{id}")
-    public Person deleteById(@PathVariable(value = "id") Long id)
-    {
+    public Person deleteById(@PathVariable(value = "id") Long id) {
         return personService.deleteById(id);
     }
 }

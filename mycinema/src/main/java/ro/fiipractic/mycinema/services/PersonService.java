@@ -3,7 +3,6 @@ package ro.fiipractic.mycinema.services;
 import ro.fiipractic.mycinema.entities.Person;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PersonService {
     String helloFromService();
@@ -14,7 +13,11 @@ public interface PersonService {
 
     List<Person> getAll();
 
+    Person modifyName(Long id, String newName);
+
     Person modifyPhone(Long id, String newNumber);
+
+    Person modifyEmail(Long id, String newEmail);
 
     Person deleteById(Long id);
 }
