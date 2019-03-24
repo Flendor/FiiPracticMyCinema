@@ -18,5 +18,7 @@ public interface PersonService {
 
     Person modifyEmail(Long id, String newEmail);
 
+    Person update(Long id, String newName, String newEmail, String newPhone);
+
     void deleteById(Long id);
 }

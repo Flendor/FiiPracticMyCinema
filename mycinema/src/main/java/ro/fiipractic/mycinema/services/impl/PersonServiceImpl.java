@@ -52,6 +52,15 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person update(Long id, String newName, String newEmail, String newPhone) {
+        Person p = personRepository.findById(id).orElseThrow(()->new RuntimeException("Non-existent ID!"));
+        p.setFullName(newName);
+        p.setEmail(newEmail);
+        p.setPhone(newPhone);
+        return personRepository.save(p);
+    }
+
+    @Override
     public void deleteById(Long id) {
         personRepository.deleteById(id);
     }

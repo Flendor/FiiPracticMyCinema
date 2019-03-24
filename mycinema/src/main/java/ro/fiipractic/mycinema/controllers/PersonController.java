@@ -49,4 +49,10 @@ public class PersonController {
     public void deleteById(@PathVariable(value = "id") Long id) {
         personService.deleteById(id);
     }
+
+    @PutMapping(value = "/all")
+    public Person updatePerson(@RequestParam(value = "id") Long id, @RequestParam(value = "newName") String newName,
+                               @RequestParam(value = "newPhone") String newPhone, @RequestParam(value = "newEmail") String newEmail) {
+        return personService.update(id, newName, newPhone, newEmail);
+    }
 }
