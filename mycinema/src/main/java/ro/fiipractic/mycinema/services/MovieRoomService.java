@@ -11,4 +11,6 @@ public interface MovieRoomService {
     List<MovieRoom> getAll();
 
     MovieRoom saveMovieRoom(MovieRoom movieRoomForSave);
+
+    List<MovieRoom> getAllMovieRoomsByCinema_Id(Long cinemaId);
 }

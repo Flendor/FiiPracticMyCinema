@@ -22,4 +22,14 @@ public class CinemaServiceImpl implements CinemaService {
     public Cinema saveCinema(Cinema cinemaForSave) {
         return cinemaRepository.save(cinemaForSave);
     }
+
+    @Override
+    public Cinema getById(Long Id) {
+        return cinemaRepository.findById(Id).orElseThrow(() -> new RuntimeException("Non-existent ID!"));
+    }
+
+    @Override
+    public List<Cinema> getCinemasByMovieRoomsCapacity(Integer capacity) {
+        return cinemaRepository.getCinemasByMovieRoomsCapacity(capacity);
+    }
 }

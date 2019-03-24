@@ -1,24 +1,14 @@
-package ro.fiipractic.mycinema.entities;
+package ro.fiipractic.mycinema.dtos;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+public class MovieRoomDto {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "movie_room")
-public class MovieRoom {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     private Integer capacity;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "cinema_id")
-    private Cinema cinema;
+    private Long cinema_id;
 
     public Long getId() {
         return id;
@@ -44,11 +34,11 @@ public class MovieRoom {
         this.capacity = capacity;
     }
 
-    public Cinema getCinema() {
-        return cinema;
+    public Long getCinema_id() {
+        return cinema_id;
     }
 
-    public void setCinema(Cinema cinema) {
-        this.cinema = cinema;
+    public void setCinema_id(Long cinema_id) {
+        this.cinema_id = cinema_id;
     }
 }

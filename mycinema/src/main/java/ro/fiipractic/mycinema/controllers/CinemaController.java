@@ -23,25 +23,20 @@ public class CinemaController {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public List<Cinema> getAllCinemas()
-    {
+    public List<Cinema> getAllCinemas() {
         return cinemaService.getAll();
     }
 
     @PostMapping
-    public ResponseEntity<Cinema> saveCinema(@RequestBody CinemaDto cinemaDto)
-    {
+    public ResponseEntity<Cinema> saveCinema(@RequestBody CinemaDto cinemaDto) throws URISyntaxException {
         Cinema cinema = modelMapper.map(cinemaDto, Cinema.class);
         cinemaService.saveCinema(cinema);
-        ResponseEntity c = null;
-        try
-        {
-            c = ResponseEntity.created(new URI("/api/cinemas" + cinema.getId())).body(cinema);
-        }
-        catch(URISyntaxException e)
-        {
-            System.err.println(e.getMessage());
-        }
-        return c;
+        return ResponseEntity.created(new URI("/api/cinemas/" + cinema.getId())).body(cinema);
+    }
+
+    @GetMapping(value = "/filter")
+    public List<Cinema> getCinemasByMovieRoomsCapacity(@RequestParam("capacity") Integer capacity)
+    {
+        return cinemaService.getCinemasByMovieRoomsCapacity(capacity);
     }
 }
